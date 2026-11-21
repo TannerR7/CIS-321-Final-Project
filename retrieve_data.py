@@ -15,14 +15,14 @@ def retrieve_data(restaurant_id):
     )
     records = executeSql.fetchall()
 
-    pre_data = []
+    data = []
 
     for record in records:
-        pre_data.append({"visitor_id": record[0], "date": record[1], "customer_count": record[2], "reserved_visitors": record[3], "holiday_flag": record[4]})
+        data.append({"visitor_id": record[0], "date": record[1], "customer_count": record[2], "reserved_visitors": record[3], "holiday_flag": record[4]})
 
 
     connectDB.close()
-    return pre_data
+    return data
 
 
 
@@ -44,16 +44,16 @@ def retrieve_forecast_predictions(restaurant_id):
     )
     records = executeSql.fetchall()
 
-    pre_forecasts= []
+    forecasts= []
 
     for record in records:
-        pre_forecasts.append({"forecast_id": record[0], "week_start": record[1], "week_end": record[2], "when_generated": record[3],
+        forecasts.append({"forecast_id": record[0], "week_start": record[1], "week_end": record[2], "when_generated": record[3],
                               "date": record[4], "reserved_visitors": record[5], "holiday_flag": record[6],
                               "predicted_visitors": record[7], "lower_range": record[8], "upper_range": record[9]})
 
 
     connectDB.close()
-    return pre_forecasts
+    return forecasts
 
 
 

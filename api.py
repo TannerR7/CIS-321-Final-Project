@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from login import login
 from generate_forecast import generate_forecast
 
-
 app = FastAPI()
 
 class RequestingLogin(BaseModel):

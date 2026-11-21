@@ -17,7 +17,7 @@ def login(username, password):
 
     connectDB.close()
     if record is None:
-        raise ValueError("Incorrect username or password.")
+        raise ValueError("Incorrect username and or password.")
     
     return{"user_id": record[0], "restaurant_id": record[1], "username": record[2], "position": record[3]}
 

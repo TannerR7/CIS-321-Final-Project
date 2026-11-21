@@ -1,18 +1,11 @@
 import sqlite3
 import pandas as pd
 
-df = pd.read_csv("data/prepared_data.csv")
-
-print(df.head())
-print(df.columns.tolist())
-print("Total number of rows:", len(df))
-
+data = pd.read_csv("data/prepared_data.csv")
 connectDB = sqlite3.connect("forecast_database.db")
 connectDB.execute("PRAGMA foreign_keys = ON")
 
-restaurant_ids = df["air_store_id"].unique()
-
-print("Number of restaurants:", len(restaurant_ids))
+restaurant_ids = data["air_store_id"].unique()
 
 for restaurant_id in restaurant_ids:
     connectDB.execute(
@@ -25,7 +18,7 @@ for restaurant_id in restaurant_ids:
 
 daily_records = []
 
-for row in df.itertuples(index=False):
+for row in data.itertuples(index=False):
     daily_records.append((row.air_store_id, row.visit_date, int(row.visitors), None, int(row.holiday_flg)))
 
 
@@ -36,7 +29,6 @@ connectDB.executemany(
     values(?, ?, ?, ?, ?)
     """,
     daily_records)
-
 
 connectDB.commit()
 
@@ -50,6 +42,6 @@ executeSql = connectDB.execute(
     "SELECT COUNT(*) FROM past_visitors"
 )
 
-print("Historical records in database:", executeSql.fetchone()[0])
+
 
 connectDB.close()
