@@ -21,7 +21,6 @@ def edit_data(restaurant_id, visit_date, user_id, field_changed, corrected_value
 
 
 
-
     with connectDB:
         connectDB.execute(
             f"""
@@ -43,14 +42,3 @@ def edit_data(restaurant_id, visit_date, user_id, field_changed, corrected_value
 
     connectDB.close()
     return{"restaurant_id": restaurant_id, "visit_date": visit_date, "field_changed": field_changed, "previous_value": previous_value, "corrected_value": corrected_value, "message": "data corrected"}
-
-if __name__ == "__main__":
-    result = edit_data(
-        restaurant_id="air_ba937bf13d40fb24",
-        visit_date="2017-04-28",
-        user_id=1,
-        field_changed="holiday_flag",
-        corrected_value=0
-    )
-
-    print(result)

@@ -36,8 +36,6 @@ executeSql = connectDB.execute(
     "SELECT COUNT(*) FROM restaurant"
 )
 
-print("Restaurants in database:", executeSql.fetchone()[0])
-
 executeSql = connectDB.execute(
     "SELECT COUNT(*) FROM past_visitors"
 )

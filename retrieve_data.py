@@ -26,7 +26,6 @@ def retrieve_data(restaurant_id):
 
 
 
-
 def retrieve_forecast_predictions(restaurant_id):
     connectDB = sqlite3.connect("forecast_database.db")
     connectDB.execute("PRAGMA foreign_keys = ON")

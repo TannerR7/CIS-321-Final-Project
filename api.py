@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from login import login
 from generate_forecast import generate_forecast
 
-app = FastAPI()
+api = FastAPI()
 
 class RequestingLogin(BaseModel):
     username: str
@@ -17,11 +17,11 @@ class RequestingForecast(BaseModel):
     daily_holiday_flags: list[int]
 
 
-@app.get("/")
+@api.get("/")
 def home():
-    return {"message": "API is now running"}
+    return {"message": "The API is now running"}
 
-@app.post("/login")
+@api.post("/login")
 
 def user_login(request: RequestingLogin):
     try:

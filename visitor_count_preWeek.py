@@ -47,6 +47,6 @@ def record_actual_visitors (forecast_id, actual_visitors):
         )
 
     connectDB.close()
-    return {"forecast_id": forecast_id, "records_saved": len(daily_records), "message": "The customer count has been saved."}       
+    return {"forecast_id": forecast_id, "records_saved": len(daily_records), "message": "The customer count has been saved into the database"}       
 
 
