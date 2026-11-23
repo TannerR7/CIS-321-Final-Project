@@ -36,13 +36,12 @@ def home():
     return {"message": "The API is now running"}
 
 
-
 @api.post("/login")
 def user_login(request: RequestingLogin):
     try:
         return login(request.username, request.password)
     except ValueError as error:
-        raise HTTPException(status_code=401, detail=(error))
+        raise HTTPException(status_code=401, detail=str(error))
 
 
 @api.post("/forecast")
@@ -50,7 +49,7 @@ def gen_forecast(request: RequestingForecast):
     try:
         return generate_forecast(request.restaurant_id, request.user_id, request.forecast_start, request.daily_reservations, request.daily_holiday_flags)
     except ValueError as error:
-        raise HTTPException(status_code=400, detail=(error))
+        raise HTTPException(status_code=400, detail=str(error))
 
 
 @api.get("/retrieveData/{restaurant_id}")
@@ -68,7 +67,7 @@ def act_visitors(request: RequestingActVisitors):
     try:
         return record_actual_visitors(request.forecast_id, request.actual_visitors)
     except ValueError as error:
-        raise HTTPException(status_code=400, detail=(error))
+        raise HTTPException(status_code=400, detail=str(error))
 
 
 @api.put("/edit-data")
@@ -76,5 +75,5 @@ def ed_data(request: RequestingEditData):
     try:
         return edit_data(request.restaurant_id, request.visit_date, request.user_id, request.field_changed, request.corrected_value)
     except ValueError as error:
-        raise HTTPException(status_code=400, detail=(error))
+        raise HTTPException(status_code=400, detail=str(error))
 
