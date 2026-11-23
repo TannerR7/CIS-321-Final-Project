@@ -6,8 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import java.net.URI;
 import java.net.http.HttpClient;
