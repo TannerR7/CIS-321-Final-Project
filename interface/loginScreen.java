@@ -21,7 +21,7 @@ public class loginScreen extends Application{
     @Override
     public void start(Stage primaryStage){
         Label title = new Label("Demand Forecast System");
-        title.setStyle("-fx-font-size: 32px; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
         Label message = new Label();
         message.setStyle("-fx-font-size: 15px;");
         Label loginTitle = new Label("Login");
@@ -96,29 +96,23 @@ public class loginScreen extends Application{
         BorderPane bp = new BorderPane();
         bp.setPadding(new Insets(20));
 
-        HBox hb = new HBox();
-        hb.setAlignment(Pos.CENTER_LEFT);
-        hb.getChildren().addAll(title);
-
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER_RIGHT);
+        b1.getChildren().add(btnClose);
+        bp.setBottom(b1);
+        
         HBox tr = new HBox();
-        tr.setAlignment(Pos.CENTER_LEFT);
-        tr.setSpacing(10);
-
-        Region s = new Region();
-        HBox.setHgrow(s, Priority.ALWAYS);
-
-        tr.getChildren().addAll(title, s, btnClose);
-
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
         bp.setTop(tr);
 
         VBox vb = new VBox(20);
         vb.setAlignment(Pos.CENTER);
         vb.setMaxWidth(300);
         vb.getChildren().addAll(loginTitle , enterUsername, enterPassword, btnLogin, message);
-
         bp.setCenter(vb);
 
-        Scene scene = new Scene(bp, 1000, 600);
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Login Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);

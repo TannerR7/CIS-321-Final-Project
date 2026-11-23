@@ -4,7 +4,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,6 +19,7 @@ import com.google.gson.JsonParser;
 public class allData {
     public void show(Stage primaryStage, loginInfo info){
         Label title = new Label("Data");
+        title.setStyle("-fx-font-size: 32px; -fx-font-weight: bold;");
         Label msg = new Label();
 
         Button btnHub = new Button("Back to Hub");
@@ -87,16 +91,43 @@ public class allData {
         btnClose.setOnAction(e->{
             System.exit(0);
         });
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(15));
+
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnHub.setPrefSize(200, 50);
+        btnHub.setStyle("-fx-font-size: 15px;");
+        btnEdit.setPrefSize(200, 50);
+        btnEdit.setStyle("-fx-font-size: 15px;");
+
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
+
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
+        bp.setTop(tr);
 
         ScrollPane sp = new ScrollPane();
         sp.setFitToWidth(true);
+        sp.setMaxHeight(600);
         sp.setContent(gp);
-        screenLayout.getChildren().addAll(title, sp, msg, btnEdit, btnHub, btnClose);
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER_RIGHT);
+        b1.getChildren().add(btnClose);
+        bp.setBottom(b1);
+
+        HBox b2 = new HBox(20);
+        b2.setAlignment(Pos.CENTER);
+        b2.getChildren().addAll(btnEdit, btnHub);
+
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(550);
+        vb.getChildren().addAll(sp, b2, msg);
+        bp.setCenter(vb);
+        
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("All Data Display Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);

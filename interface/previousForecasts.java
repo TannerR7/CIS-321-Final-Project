@@ -4,7 +4,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -18,7 +20,9 @@ import com.google.gson.JsonParser;
 public class previousForecasts {
     public void show(Stage primaryStage, loginInfo info){
         Label title = new Label("Previous Forecasts");
+        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
         Label msg = new Label();
+        msg.setStyle("-fx-font-size: 15px;");
 
         Button btnHub = new Button("Back to Hub");
 
@@ -85,19 +89,40 @@ public class previousForecasts {
             System.exit(0);
         });
 
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(15));
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnHub.setPrefSize(200, 50);
+        btnHub.setStyle("-fx-font-size: 15px;");
+
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
+
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
+        bp.setTop(tr);
 
         ScrollPane sp = new ScrollPane();
         sp.setFitToWidth(true);
+        sp.setMaxHeight(600);
         sp.setContent(gp);
-        screenLayout.getChildren().addAll(title, sp, msg, btnHub, btnClose);
+        
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER);
+        b1.getChildren().addAll(btnHub, btnClose);
+        
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(650);
+        vb.getChildren().addAll(sp, b1, msg);
+        bp.setCenter(vb);
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+
+
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Display Previous Forecast Screen");
-        primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
     }

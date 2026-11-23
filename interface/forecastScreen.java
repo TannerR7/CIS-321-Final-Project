@@ -4,7 +4,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeParseException;
@@ -19,6 +23,9 @@ import com.google.gson.JsonObject;
 public class forecastScreen{
     public void show(Stage primaryStage, loginInfo info){
         Label title = new Label("Generate Forecast");
+        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
+        Label sd = new Label("Start Date of Forecast is Sunday");
+        sd.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
 
         TextField startDate = new TextField();
         startDate.setPromptText("YYYY-MM-DD");
@@ -155,13 +162,39 @@ public class forecastScreen{
         btnClose.setOnAction(e->{
             System.exit(0);
         });
-        
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(30));
-        screenLayout.getChildren().addAll(title, new Label("Start Date of Forecast is Sunday"), startDate, gp, btnGen, btnHub, btnClose, msg);
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnGen.setPrefSize(200, 50);
+        btnGen.setStyle("-fx-font-size: 15px;");
+        btnHub.setPrefSize(200, 50);
+        btnHub.setStyle("-fx-font-size: 15px;");
+
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
+
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER_LEFT);
+        tr.setSpacing(10);
+        Region s = new Region();
+        HBox.setHgrow(s, Priority.ALWAYS);
+        tr.getChildren().addAll(title, s, btnClose);
+
+        bp.setTop(tr);
+
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER);
+        b1.getChildren().addAll(btnGen, btnHub);
+        bp.setBottom(b1);
+
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(650);
+        vb.getChildren().addAll(sd, startDate, gp, msg);
+
+        bp.setCenter(vb);
+
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Forcast Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);

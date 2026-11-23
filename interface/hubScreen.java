@@ -4,11 +4,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 
 public class hubScreen{
     public void show (Stage primaryStage, loginInfo info){
         Label title = new Label("Demand Forecast Hub");
+        title.setStyle("-fx-font-size: 32px; -fx-font-weight: bold;");
 
         Button btnForcast = new Button("Generate Forecast");
         Button btnViewForecasts = new Button("View Previous Forecasts");
@@ -40,12 +43,47 @@ public class hubScreen{
             System.exit(0);
         });
 
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(30));
-        screenLayout.getChildren().addAll(title, btnForcast, btnViewForecasts, btnViewData, btnInputVisitors, btnClose);
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnForcast.setPrefSize(200, 50);
+        btnForcast.setStyle("-fx-font-size: 15px;");
+        btnInputVisitors.setPrefSize(200, 50);
+        btnInputVisitors.setStyle("-fx-font-size: 15px;");
+        btnViewData.setPrefSize(200, 50);
+        btnViewData.setStyle("-fx-font-size: 15px;");
+        btnViewForecasts.setPrefSize(200, 50);
+        btnViewForecasts.setStyle("-fx-font-size: 15px;");
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
+        
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
+        bp.setTop(tr);
+
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER);
+        b1.getChildren().addAll(btnForcast, btnInputVisitors);
+
+        HBox b2 = new HBox(20);
+        b2.setAlignment(Pos.CENTER);
+        b2.getChildren().addAll(btnViewForecasts, btnViewData);
+
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(1000);
+        vb.getChildren().addAll(b1, b2);
+
+        bp.setCenter(vb);
+
+        HBox b3 = new HBox(20);
+        b3.setAlignment(Pos.CENTER_RIGHT);
+        b3.getChildren().add(btnClose);
+
+        bp.setBottom(b3);
+
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Hub Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);

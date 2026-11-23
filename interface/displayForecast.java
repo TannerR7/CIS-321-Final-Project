@@ -4,7 +4,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,8 +20,10 @@ public class displayForecast {
         JsonArray predictions = response.getAsJsonArray("predictions");
 
         Label title = new Label("Forecast (ID:" + forecastID + ") for the week");
-
+        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
+        
         GridPane gp = new GridPane();
+
         gp.setHgap(15);
         gp.setVgap(15);
         gp.setAlignment(Pos.CENTER);
@@ -55,13 +59,31 @@ public class displayForecast {
             System.exit(0);
         });
 
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(15));
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnHub.setPrefSize(200, 50);
+        btnHub.setStyle("-fx-font-size: 15px;");
 
-        screenLayout.getChildren().addAll(title, gp, btnHub, btnClose);
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
+        bp.setTop(tr);
+
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER);
+        b1.getChildren().addAll(btnHub, btnClose);
+
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(500);
+        vb.getChildren().addAll(gp, b1);
+        bp.setCenter(vb);
+
+
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Display Forecast Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);

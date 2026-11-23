@@ -2,6 +2,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.time.LocalDate;
@@ -15,6 +17,9 @@ import com.google.gson.JsonObject;
 public class editData {
     public void show(Stage primaryStage, loginInfo info){
         Label title = new Label("Generate Forecast");
+        title.setStyle("-fx-font-size: 32px; -fx-font-weight: bold;");
+        Label eTitle = new Label("Edit Date");
+        eTitle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
         Label msg = new Label();
         TextField editDate = new TextField();
         editDate.setPromptText("YYYY-MM-DD");
@@ -110,12 +115,38 @@ public class editData {
         btnClose.setOnAction(e->{
             System.exit(0);
         });
-        VBox screenLayout = new VBox(15);
-        screenLayout.setAlignment(Pos.CENTER);
-        screenLayout.setPadding(new Insets(30));
-        screenLayout.getChildren().addAll(title, new Label("Edit Date"), editDate, correctedValue, chooseField, btnSave, btnHub, btnClose, msg);
 
-        Scene scene = new Scene(screenLayout, 500, 300);
+        btnClose.setPrefSize(200, 50);
+        btnClose.setStyle("-fx-font-size: 15px;");
+        btnHub.setPrefSize(200, 50);
+        btnHub.setStyle("-fx-font-size: 15px;");
+        btnSave.setPrefSize(200, 50);
+        btnSave.setStyle("-fx-font-size: 15px;");
+
+        BorderPane bp = new BorderPane();
+        bp.setPadding(new Insets(20));
+
+        HBox tr = new HBox();
+        tr.setAlignment(Pos.CENTER);
+        tr.getChildren().add(title);
+        bp.setTop(tr);
+
+        HBox b1 = new HBox(20);
+        b1.setAlignment(Pos.CENTER_RIGHT);
+        b1.getChildren().add(btnClose);
+        bp.setBottom(b1);
+
+        HBox b2 = new HBox(20);
+        b2.setAlignment(Pos.CENTER);
+        b2.getChildren().addAll(btnSave, btnHub);
+
+        VBox vb = new VBox(15);
+        vb.setAlignment(Pos.CENTER);
+        vb.setMaxWidth(525);
+        vb.getChildren().addAll(eTitle, editDate, correctedValue, chooseField, b2, msg);
+        bp.setCenter(vb);
+
+        Scene scene = new Scene(bp);
         primaryStage.setTitle("Edit Screen");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
