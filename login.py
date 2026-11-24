@@ -21,8 +21,3 @@ def login(username, password):
     
     return{"user_id": record[0], "restaurant_id": record[1], "username": record[2], "position": record[3]}
 
-
-
-if __name__ == "__main__":
-    result = login("test_owner", "password124")
-    print(result)

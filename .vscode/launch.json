@@ -8,7 +8,7 @@
             "request": "launch",
             "mainClass": "loginScreen",
             "console": "internalConsole",
-            "vmArgs": "--module-path \"C:\\Users\\tanne\\Downloads\\javafx-sdk-25.0.4\\lib\" --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.swing, --enable-native-access=javafx.graphics"
+            "vmArgs": "--module-path \"${workspaceFolder}/lib\" -Djava.library.path=\"${workspaceFolder}/lib\" --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
         }
     ]
 }
