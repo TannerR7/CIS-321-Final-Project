@@ -7,12 +7,10 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -106,11 +104,12 @@ public class inputVisitors{
                         msg.setText("Customer Count has been saved");
                         msg.setStyle("-fx-text-fill: green;");
 
-                        System.out.println(response.body());
+                        hubScreen pf = new hubScreen();
+                        pf.show(primaryStage, info);
+
                     }else{
                         msg.setText("Customer count has failed to save");
                         msg.setStyle("-fx-text-fill: red;");
-                        System.out.println(response.body());
                     }
 
                 }catch(Exception error){
