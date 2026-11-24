@@ -9,7 +9,7 @@ Part 1: Setting up everthing
 
 Part 2: Starting up the System
 1. run the following code in the terminal: python -m uvicorn api:api --reload
-2. Then run loginScreen.java file, which will start up the javaFX interface.
+2. Then run loginScreen.java(located in the interface folder) file, which will start up the javaFX interface.
 
 Part 3: JavaFX screens
 1. The first screen is the login screen: to login use the temp username and password created.
