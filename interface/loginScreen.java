@@ -69,6 +69,7 @@ public class loginScreen extends Application{
                     message.setStyle("-fx-text-fill: red;");
                 }else{
                     message.setText("An error has occured with your login");
+                    message.setStyle("-fx-text-fill: red;");
                 }
             }catch (Exception error){
                 message.setText("Can't connect to the API");
